@@ -1,0 +1,11 @@
+name = "rr-backend"
+main = "build/worker/shim.mjs"
+compatibility_date = "2025-05-22"
+
+[build]
+command = "cargo install -q worker-build && worker-build --release"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "menu-db"
+database_id = "8bab6a83-3cc4-479c-a7c2-a983d83c7966"
