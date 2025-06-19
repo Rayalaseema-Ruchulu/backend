@@ -367,7 +367,7 @@ dependencies = [
 [[package]]
 name = "models"
 version = "0.1.0"
-source = "git+https://github.com/Rayalaseema-Ruchulu/models.git#8dede7ff2acaf51996c5c60903f61a7ade8be4d5"
+source = "git+https://github.com/Rayalaseema-Ruchulu/models.git#e76621092e250c49c7010167d34dc8e199d71010"
 dependencies = [
  "serde",
 ]
