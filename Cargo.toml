@@ -17,7 +17,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 worker = { version = "0.5.0", features = ['d1'] }
-worker-macros = "0.5.0"
+worker-macros = "0.6.0"
 console_error_panic_hook = { version = "0.1.7" }
 models = { git = "https://github.com/Rayalaseema-Ruchulu/models.git", version = "0.1.0" }
 serde = "1.0.219"
