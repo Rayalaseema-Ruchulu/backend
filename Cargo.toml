@@ -1,0 +1,27 @@
+[workspace]
+members = [
+    "management",
+    "public",
+    "models",
+]
+resolver = "3"
+
+[workspace.package]
+edition = "2024"
+version = "0.1.0"
+publish = false
+
+[profile.release]
+lto = true
+strip = true
+codegen-units = 1
+
+# # https://github.com/rustwasm/wasm-pack/issues/1247
+# [package.metadata.wasm-pack.profile.release]
+# wasm-opt = false
+
+[workspace.dependencies]
+worker = { version = "0.5.0", features = ["d1"] }
+worker-macros = { version = "0.5.0" }
+console_error_panic_hook = { version = "0.1.7" }
+serde = "1.0.219"
