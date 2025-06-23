@@ -9,9 +9,10 @@ jobs:
     environment: Production
     steps:
       - uses: actions/checkout@v4
-      - run: rustup -v target add wasm32-unknown-unknown --toolchain stable && cd public/
+      - run: rustup -v target add wasm32-unknown-unknown --toolchain stable
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: "latest"
+          workingDirectory: "public"
