@@ -15,6 +15,7 @@ publish = false
 lto = true
 strip = true
 codegen-units = 1
+panic = "abort"
 
 # # https://github.com/rustwasm/wasm-pack/issues/1247
 # [package.metadata.wasm-pack.profile.release]
