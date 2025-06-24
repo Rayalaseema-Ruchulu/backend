@@ -17,11 +17,6 @@ strip = true
 codegen-units = 1
 panic = "abort"
 
-# # https://github.com/rustwasm/wasm-pack/issues/1247
-[package.metadata.wasm-pack.profile.release]
-# wasm-opt = false
-wasm-opt = ['-O', '--enable-bulk-memory']
-
 [workspace.dependencies]
 worker = { version = "0.5.0", features = ["d1"] }
 worker-macros = { version = "0.5.0" }
