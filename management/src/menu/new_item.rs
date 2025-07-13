@@ -1,4 +1,4 @@
-use worker::{query, Error::RustError, Request, Response, Result, RouteContext};
+use worker::{Error::RustError, Request, Response, Result, RouteContext, query};
 
 use super::NewItem;
 

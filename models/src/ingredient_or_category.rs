@@ -4,6 +4,8 @@ use serde::{Deserialize, Serialize};
 // use the same struct to store either one.
 #[derive(Deserialize, Serialize)]
 pub struct IngredientOrCategory {
+    #[serde(alias = "ingredient_id")]
+    #[serde(alias = "category_id")]
     id: usize,
     name: String,
 }

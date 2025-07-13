@@ -1,5 +1,5 @@
 use menu::new_item::post_new_item;
-use worker::{event, Context, Env, Request, Response, Result, Router};
+use worker::{Context, Env, Request, Response, Result, Router, event};
 
 use crate::menu::service_bindings::send_to_common_backend;
 

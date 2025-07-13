@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS item_categories (
     menu_item_id INTEGER NOT NULL,
     category_id INTEGER NOT NULL,
     PRIMARY KEY (menu_item_id, category_id),
-    FOREIGN KEY (menu_item_id) REFERENCES menu_items(id),
-    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+    FOREIGN KEY (menu_item_id) REFERENCES menu_items(id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories(id)
 ) STRICT;
 
 -- We will be seraching by category ID as well, so we will make an index just for it so that
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS item_ingredients (
     ingredient_id INTEGER NOT NULL,
     PRIMARY KEY (menu_item_id, ingredient_id),
     FOREIGN KEY (menu_item_id) REFERENCES menu_items(id) ON DELETE CASCADE,
-    FOREIGN KEY (ingredient_id) REFERENCES ingredients(id) ON DELETE CASCADE
+    FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
 ) STRICT;
 
 PRAGMA optimize;

@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
 
 pub mod new_item;
-pub mod update_item;
 pub mod service_bindings;
+pub mod update_item;
 
 #[derive(Serialize, Deserialize)]
 struct NewItem {
