@@ -1,5 +1,3 @@
--- BEGIN TRANSACTION;
-
 -- Insert breakfast category
 INSERT INTO categories (id, name) VALUES
 	(1, 'Breakfast');
@@ -68,6 +66,3 @@ INSERT INTO item_ingredients (menu_item_id, ingredient_id) VALUES
 	-- Kadapa Ghee Karam Dosa
 	(7, 1), (7, 2), (7, 3), (7, 4), (7, 5),
 	(7, 6), (7, 12), (7, 13), (7, 14), (7, 10), (7, 15);
-
--- COMMIT;
--- ```
