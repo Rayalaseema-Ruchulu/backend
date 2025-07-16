@@ -1,28 +1,34 @@
+mod error;
 mod etag;
 mod menu;
 
-use menu::details::get_details;
-use menu::item::get_item;
-use worker::{Context, Env, Request, Response, Result, Router, event};
+use axum::{Router, routing::get};
+use tower_service::Service;
+use worker::{Context, Env, HttpRequest, Result, event};
 
-use crate::menu::category::{get_categories, get_category, get_category_items};
-use crate::menu::image::{get_image, get_thumbnail};
-use crate::menu::ingredients::{get_ingredient, get_ingredients};
+use crate::menu::category::*;
+use crate::menu::details::get_details;
+use crate::menu::image::*;
+use crate::menu::ingredients::*;
+use crate::menu::item::get_item;
+
+pub(crate) type HttpResponse = axum::http::Response<axum::body::Body>;
 
 #[event(fetch)]
-async fn fetch(req: Request, env: Env, _ctx: Context) -> Result<Response> {
+async fn fetch(req: HttpRequest, env: Env, _ctx: Context) -> Result<HttpResponse> {
     console_error_panic_hook::set_once();
 
-    Router::new()
-        .get_async("/menu/categories", get_categories)
-        .get_async("/menu/category/:id", get_category)
-        .get_async("/menu/category/:id/items", get_category_items)
-        .get_async("/menu/ingredients", get_ingredients)
-        .get_async("/menu/ingredient/:id", get_ingredient)
-        .get_async("/menu/:id", get_item)
-        .get_async("/menu/:id/details", get_details)
-        .get_async("/menu/:id/image", get_image)
-        .get_async("/menu/:id/thumbnail", get_thumbnail)
-        .run(req, env)
-        .await
+    Ok(Router::new()
+        .route("/menu/categories", get(get_categories))
+        .route("/menu/category/{id}", get(get_category))
+        .route("/menu/category/{id}/items", get(get_category_items))
+        .route("/menu/ingredients", get(get_ingredients))
+        .route("/menu/ingredient/{id}", get(get_ingredient))
+        .route("/menu/{id}", get(get_item))
+        .route("/menu/{id}/details", get(get_details))
+        .route("/menu/{id}/image", get(get_image))
+        .route("/menu/{id}/thumbnail", get(get_thumbnail))
+        .with_state(env)
+        .call(req)
+        .await?)
 }

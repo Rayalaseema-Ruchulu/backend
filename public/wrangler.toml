@@ -4,6 +4,7 @@ compatibility_date = "2025-06-12"
 
 [build]
 command = "cargo install -q worker-build && worker-build --release"
+watch_dir = ["src/"]
 
 [[d1_databases]]
 binding = "menu-db"

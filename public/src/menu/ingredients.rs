@@ -1,32 +1,41 @@
+use axum::{
+    Json,
+    extract::{Path, State},
+};
 use models::ingredient_or_category::IngredientOrCategory;
-use worker::{Request, Response, Result, RouteContext, query};
+use worker::{Env, query};
 
-pub(crate) async fn get_ingredients(_req: Request, ctx: RouteContext<()>) -> Result<Response> {
-    let db = ctx.d1("menu-db")?;
+use crate::error::{ApiError, ApiResult};
+
+/// Gets all the ingredients
+#[worker::send]
+#[axum::debug_handler]
+pub(crate) async fn get_ingredients(
+    State(env): State<Env>,
+) -> ApiResult<Json<Vec<IngredientOrCategory>>> {
+    let db = env.d1("menu-db")?;
     let results = query!(&db, "SELECT * FROM ingredients")
         .all()
         .await?
         .results::<IngredientOrCategory>()?;
 
-    Response::builder().from_json(&results)
+    Ok(Json(results))
 }
 
-pub(crate) async fn get_ingredient(_req: Request, ctx: RouteContext<()>) -> Result<Response> {
-    match ctx.param("id") {
-        Some(id) => match id.parse::<usize>() {
-            Ok(id) => {
-                let db = ctx.d1("menu-db")?;
-                let results = query!(&db, "SELECT * FROM ingredients WHERE id = ?", id)?
-                    .first::<IngredientOrCategory>(None)
-                    .await?;
+/// Gets the name of an ingredient
+#[worker::send]
+#[axum::debug_handler]
+pub(crate) async fn get_ingredient(
+    State(env): State<Env>,
+    Path(id): Path<usize>,
+) -> ApiResult<Json<IngredientOrCategory>> {
+    let db = env.d1("menu-db")?;
+    let results = query!(&db, "SELECT * FROM ingredients WHERE id = ?", id)?
+        .first::<IngredientOrCategory>(None)
+        .await?;
 
-                match results {
-                    Some(ingredient) => Ok(Response::builder().from_json(&ingredient)?),
-                    None => Ok(Response::builder().with_status(404).empty()),
-                }
-            }
-            Err(_) => Ok(Response::builder().with_status(422).empty()),
-        },
-        None => Ok(Response::builder().with_status(400).empty()),
+    match results {
+        Some(ingredient) => Ok(Json(ingredient)),
+        None => Err(ApiError::NotFound),
     }
 }
