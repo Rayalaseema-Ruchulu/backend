@@ -13,3 +13,8 @@ database_id = "8bab6a83-3cc4-479c-a7c2-a983d83c7966"
 
 [images]
 binding = "images"
+
+[[kv_namespaces]]
+binding = "images-temp"
+id = "f5e3920a1c5c435197d7218f91dd0d1b"
+preview_id = "f5e3920a1c5c435197d7218f91dd0d1b"
