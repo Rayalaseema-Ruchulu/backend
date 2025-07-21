@@ -14,7 +14,7 @@ pub(crate) async fn get_categories(
     State(env): State<Env>,
 ) -> ApiResult<Json<Vec<IngredientOrCategory>>> {
     let db = env.d1("menu-db")?;
-    let results = query!(&db, "SELECT * FROM categories")
+    let results = query!(&db, "SELECT id, name FROM categories")
         .all()
         .await?
         .results::<IngredientOrCategory>()?;
@@ -30,7 +30,7 @@ pub(crate) async fn get_category(
     Path(id): Path<usize>,
 ) -> ApiResult<Json<IngredientOrCategory>> {
     let db = env.d1("menu-db")?;
-    let results = query!(&db, "SELECT * FROM categories WHERE id = ?", id)?
+    let results = query!(&db, "SELECT id, name FROM categories WHERE id = ?", id)?
         .first::<IngredientOrCategory>(None)
         .await?;
 
@@ -56,6 +56,21 @@ pub(crate) async fn get_category_items(
     .all()
     .await?
     .results::<BasicItemDetails>()?;
+
+    Ok(Json(results))
+}
+
+/// Get all categories that are featured
+#[worker::send]
+#[axum::debug_handler]
+pub(crate) async fn get_featured_categories(
+    State(env): State<Env>,
+) -> ApiResult<Json<Vec<IngredientOrCategory>>> {
+    let db = env.d1("menu-db")?;
+    let results = query!(&db, "SELECT id, name FROM categories WHERE featured = 1")
+        .all()
+        .await?
+        .results::<IngredientOrCategory>()?;
 
     Ok(Json(results))
 }

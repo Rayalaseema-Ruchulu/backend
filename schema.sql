@@ -1,6 +1,8 @@
 CREATE TABLE IF NOT EXISTS categories (
     id INTEGER PRIMARY KEY,
-    name TEXT NOT NULL
+    name TEXT NOT NULL,
+    -- 0 will be false, 1 will be true
+    featured INTEGER NOT NULL DEFAULT 0 CHECK(featured IN (0, 1))
 ) STRICT;
 
 CREATE TABLE IF NOT EXISTS ingredients (

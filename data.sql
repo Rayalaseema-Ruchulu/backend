@@ -1,6 +1,10 @@
 -- Insert breakfast category
+-- Insert categories
 INSERT INTO categories (id, name) VALUES
 	(1, 'Breakfast');
+
+-- Insert popular category and make it featured
+INSERT INTO categories (id, name, featured) VALUES (2, 'Popular', 1);
 
 -- Insert ingredients (no duplicates)
 INSERT INTO ingredients (id, name) VALUES
@@ -39,6 +43,12 @@ INSERT INTO item_categories (menu_item_id, category_id) VALUES
 	(5, 1),
 	(6, 1),
 	(7, 1);
+
+-- Link popular items to the popular category
+INSERT INTO item_categories (menu_item_id, category_id) VALUES
+	(4, 2), -- Masala Dosa
+	(5, 2), -- Onion Masala Dosa
+	(7, 2); -- Kadapa Ghee Karam Dosa
 
 -- Link menu items to their ingredients
 INSERT INTO item_ingredients (menu_item_id, ingredient_id) VALUES
