@@ -5,6 +5,8 @@ fn main() {
     println!("cargo:rerun-if-changed=NULL");
     println!("Running build script");
 
+    panic!("Testing is script is running");
+
     Command::new("flutter")
         .args(["build", "web", "--wasm", "--release"])
         .current_dir("./frontend/")
