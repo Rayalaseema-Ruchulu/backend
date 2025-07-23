@@ -1,7 +1,7 @@
 use std::{env, process::{Command, Stdio}};
 
 fn main() {
-    let web_build = Command::new("flutter")
+    Command::new("flutter")
         .args(["build", "web", "--wasm", "--release"])
         .current_dir("./frontend/")
         .stdout(Stdio::inherit())
@@ -11,14 +11,14 @@ fn main() {
 
     if env::var("NON_ROOT_CWD").is_ok() {
         Command::new("mkdir")
-            .args(["-p", "../backend/public/frontend/build/web"])
+            .args(["-p", "../backend/public/frontend/build"])
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .status()
             .expect("Failed to execute temp directory creation!");
 
         Command::new("mv")
-            .args(["./frontend/build/web", "../backend/public/frontend/build/web"])
+            .args(["./frontend/build/web", "../backend/public/frontend/build"])
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .status()
