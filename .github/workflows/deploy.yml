@@ -17,6 +17,18 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+      
+      - name: Get Flutter dependencies
+        working-directory: ./public/frontend
+        run: |
+          pwd
+          flutter pub get
+
+      - name: Build Flutter Web App
+        working-directory: ./public/frontend
+        run: |
+          pwd
+          flutter build web --wasm --release
 
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
