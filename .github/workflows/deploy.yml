@@ -15,11 +15,14 @@ jobs:
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
         with: 
-          channel: stable
+          channel: 
+            
+      - name: Test build
+        run: cd public && cargo build -vv
       
-      - name: Build & Deploy Worker
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          wranglerVersion: "latest"
-          workingDirectory: "public"
+      # - name: Build & Deploy Worker
+      #   uses: cloudflare/wrangler-action@v3
+      #   with:
+      #     apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      #     wranglerVersion: "latest"
+      #     workingDirectory: "public"
