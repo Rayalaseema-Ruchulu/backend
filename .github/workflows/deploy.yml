@@ -15,13 +15,13 @@ jobs:
       # Setup flutter for web builds
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
-        with: 
-          channel: 
-            
+        with:
+          channel: 'stable'
+
       - name: Ensure flutter web is built
         run: flutter build web --wasm --release
         working-directory: ./public/frontend
-      
+
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
