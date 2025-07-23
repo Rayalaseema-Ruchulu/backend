@@ -14,26 +14,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: rustup -v target add wasm32-unknown-unknown --toolchain stable && cargo install wasm-pack
-
-      # Setup flutter for web builds
-      - name: Set Up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
+        with: 
+          submodules: recursive
       
-      - name: Get Flutter dependencies
-        working-directory: ./public/frontend
-        run: |
-          pwd
-          ls -la
-          flutter pub get
-
-      - name: Build Flutter Web App
-        working-directory: ./public/frontend
-        run: |
-          pwd
-          flutter build web --wasm --release
+      - run: rustup -v target add wasm32-unknown-unknown --toolchain stable && cargo install wasm-pack
 
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
