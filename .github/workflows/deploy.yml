@@ -16,9 +16,6 @@ jobs:
         uses: subosito/flutter-action@v2
         with: 
           channel: stable
-
-      - name: Print working directory
-        run: pwd
       
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
