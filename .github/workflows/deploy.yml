@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - main
+
+env: 
+  CARGO_TERM_COLOR: always
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,6 +26,7 @@ jobs:
         working-directory: ./public/frontend
         run: |
           pwd
+          ls -la
           flutter pub get
 
       - name: Build Flutter Web App
