@@ -18,14 +18,6 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Get Flutter dependencies
-        run: flutter pub get
-        working-directory: ./public/frontend
-
-      - name: Build Flutter Web App
-        run: flutter build web --wasm --release
-        working-directory: ./public/frontend
-
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
