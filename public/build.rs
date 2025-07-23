@@ -6,6 +6,14 @@ fn main() {
     println!("Running build script");
 
     Command::new("flutter")
+        .args(["pub", "get"])
+        .current_dir("./frontend/")
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .status()
+        .expect("Failed to download dependancies");
+
+    Command::new("flutter")
         .args(["build", "web", "--wasm", "--release"])
         .current_dir("./frontend/")
         .stdout(Stdio::inherit())
