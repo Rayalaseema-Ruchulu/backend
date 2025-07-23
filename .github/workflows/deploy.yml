@@ -7,7 +7,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: Production
-    
+
     steps:
       - uses: actions/checkout@v4
       - run: rustup -v target add wasm32-unknown-unknown --toolchain stable && cargo install wasm-pack
@@ -19,7 +19,7 @@ jobs:
           channel: 
             
       - name: Ensure flutter web is built
-        run: cd public/flutter && flutter build web --wasm --release
+        run: cd public/frontend/ && flutter build web --wasm --release
       
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
