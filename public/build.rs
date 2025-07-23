@@ -10,6 +10,8 @@ fn main() {
         .expect("Failed to execute flutter web build command!");
 
     if env::var("NON_ROOT_CWD").is_ok() {
+        println!("Moving to expected location");
+        
         Command::new("mkdir")
             .args(["-p", "../backend/public/frontend/build"])
             .stdout(Stdio::piped())
