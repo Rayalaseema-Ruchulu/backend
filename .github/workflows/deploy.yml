@@ -19,7 +19,8 @@ jobs:
           channel: 
             
       - name: Ensure flutter web is built
-        run: cd public/frontend/ && flutter build web --wasm --release
+        run: flutter build web --wasm --release
+        working-directory: ./public/frontend
       
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
