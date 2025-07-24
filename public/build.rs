@@ -14,7 +14,7 @@ fn main() {
         .expect("Failed to download dependancies");
 
     Command::new("flutter")
-        .args(["build", "web", "--wasm", "--release"])
+        .args(["build", "web", "--wasm", "--release", "--pwa-strategy=none"])
         .current_dir("./frontend/")
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())

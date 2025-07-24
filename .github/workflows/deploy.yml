@@ -33,7 +33,7 @@ jobs:
       - name: Build Flutter Web App
         working-directory: ./public/frontend
         run: |
-          flutter build web --wasm --release
+          flutter build web --wasm --release --pwa-strategy=none
 
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
