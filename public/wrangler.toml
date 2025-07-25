@@ -3,24 +3,34 @@ main = "build/worker/shim.mjs"
 compatibility_date = "2025-06-12"
 
 [build]
-command = "cargo install -q worker-build && worker-build --release"
 watch_dir = ["src/"]
-
-[[d1_databases]]
-binding = "menu-db"
-database_name = "menu-db"
-database_id = "8bab6a83-3cc4-479c-a7c2-a983d83c7966"
-
-[images]
-binding = "images"
-
-[[kv_namespaces]]
-binding = "images-temp"
-id = "f5e3920a1c5c435197d7218f91dd0d1b"
-preview_id = "f5e3920a1c5c435197d7218f91dd0d1b"
 
 [assets]
 directory = "frontend/build/web/"
 binding = "assets"
 run_worker_first = ["/api/*"]
 not_found_handling = "single-page-application"
+
+[env.prod]
+minify = true
+keep_names = false
+build.command = "cargo install -q worker-build && worker-build --release"
+
+d1_databases = [
+    { binding = "menu-db", database_name = "menu-db", database_id = "8bab6a83-3cc4-479c-a7c2-a983d83c7966" }
+]
+
+kv_namespaces = [
+    { binding = "images-temp", id = "f5e3920a1c5c435197d7218f91dd0d1b", preview_id = "f5e3920a1c5c435197d7218f91dd0d1b" }
+]
+
+[env.dev]
+build.command = "cargo install -q worker-build && worker-build"
+
+d1_databases = [
+    { binding = "menu-db", database_name = "menu-db", database_id = "8bab6a83-3cc4-479c-a7c2-a983d83c7966" }
+]
+
+kv_namespaces = [
+    { binding = "images-temp", id = "f5e3920a1c5c435197d7218f91dd0d1b", preview_id = "f5e3920a1c5c435197d7218f91dd0d1b" }
+]

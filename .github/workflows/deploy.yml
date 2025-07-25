@@ -41,3 +41,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: "latest"
           workingDirectory: "public"
+          environment: prod
