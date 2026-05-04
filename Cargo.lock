@@ -422,7 +422,7 @@ dependencies = [
  "console_error_panic_hook",
  "serde",
  "worker",
- "worker-macros 0.5.0",
+ "worker-macros",
 ]
 
 [[package]]
@@ -556,7 +556,7 @@ dependencies = [
  "serde",
  "tower-service",
  "worker",
- "worker-macros 0.5.0",
+ "worker-macros",
 ]
 
 [[package]]
@@ -971,8 +971,8 @@ dependencies = [
  "wasm-streams",
  "web-sys",
  "worker-kv",
- "worker-macros 0.6.0",
- "worker-sys 0.6.0",
+ "worker-macros",
+ "worker-sys",
 ]
 
 [[package]]
@@ -992,22 +992,6 @@ dependencies = [
 
 [[package]]
 name = "worker-macros"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d625c24570ba9207a2617476013335f28a95cbe513e59bb814ffba092a18058"
-dependencies = [
- "async-trait",
- "proc-macro2",
- "quote",
- "syn",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "wasm-bindgen-macro-support",
- "worker-sys 0.5.0",
-]
-
-[[package]]
-name = "worker-macros"
 version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5ba7478759843ae3d56dc7ba2445e7a514a5d043eaa98cebac2789f7ab5221ee"
@@ -1019,19 +1003,7 @@ dependencies = [
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "wasm-bindgen-macro-support",
- "worker-sys 0.6.0",
-]
-
-[[package]]
-name = "worker-sys"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "34563340d41016b4381257c5a16b0d2bc590dbe00500ecfbebcaa16f5f85ce90"
-dependencies = [
- "cfg-if",
- "js-sys",
- "wasm-bindgen",
- "web-sys",
+ "worker-sys",
 ]
 
 [[package]]
